@@ -1,10 +1,15 @@
 <?php
 
-include '../Services/DatabaseConnection.php';
+include_once './Services/DatabaseConnection.php';
 
 class VendedorRepository{
 
-    public $connection = new DatabaseConnection();
+    public $connection;
+
+    function __construct()
+    {
+        $connection = new DatabaseConnection();
+    }
 
     function insert($username, $email, $password, $rg, $cpf, $telefone){
        $conn = $this->connection->getConnection();

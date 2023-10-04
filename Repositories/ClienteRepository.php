@@ -1,13 +1,21 @@
 <?php
 
-include '../Services/DatabaseConnection.php';
+include_once './Services/DatabaseConnection.php';
 
 class ClienteRepository{
 
-    public $connection = new DatabaseConnection();
+    public $connection;
 
-    function insert($username, $email, $password, $rg, $cpf, $telefone){
+    function __construct()
+    {
+        $this->connection = new DatabaseConnection();
+    }
+
+    
+
+    public function insert($username, $email, $password, $rg, $cpf, $telefone){
        $conn = $this->connection->getConnection();
+       echo 'chegou aqui';
        $sql = "
             insert into Cliente (username, email, password, rg, cpf, telefone) values ('$username', '$email', '$password', '$rg', '$cpf', '$telefone');
        ";
@@ -45,9 +53,12 @@ class ClienteRepository{
 
     function deleteById($id){
         $conn = $this->connection->getConnection();
-        $sql = "delete from Cliente where id = $id";
 
-        $conn->execute_query($sql);
+        $sql = "selete * from Cliente where id = '$id'";
+
+        $data = $conn->query($sql);
         $conn->close();
+
+        return $data->fetch_row();
     }
 }

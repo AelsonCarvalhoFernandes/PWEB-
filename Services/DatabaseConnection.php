@@ -7,7 +7,7 @@ class DatabaseConnection{
     public $DATABASE_HOST = "localhost";
     public $DATABASE_USERNAME = "root"; 
     public $DATABASE_PASSWORD = "12345"; 
-    public $DATABASE_NAME = "mozana";
+    public $DATABASE_NAME = "nozama";
     public $DATABASE_PORT = "3306";
 
     function __construct()
