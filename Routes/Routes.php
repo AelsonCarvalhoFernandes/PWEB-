@@ -28,9 +28,12 @@ $route = [
 
         // Product Controller
         "/product/create" => fn() => $productController->createProduct(),
+
         //"/product/[1-~]/" => fn() => '',
     ],
     "POST" => [
         "/register" => fn() => $authController->registerValidate(),
+
+        "/product/create" => fn() => $productController->createProduct(),
     ]
 ];

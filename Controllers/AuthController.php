@@ -30,4 +30,15 @@ class AuthController{
         return view('Register', ['Error' => 'A senha não bate']);
 
     }
+
+    function login(){
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $data = $this->clienteRepository->selectByEmail($email);
+
+        if($data == null){
+            return null;
+        }
+    }
 }

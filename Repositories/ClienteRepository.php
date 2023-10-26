@@ -11,8 +11,6 @@ class ClienteRepository{
         $this->connection = new DatabaseConnection();
     }
 
-    
-
     public function insert($username, $email, $password, $rg, $cpf, $telefone){
        $conn = $this->connection->getConnection();
        echo 'chegou aqui';
