@@ -14,7 +14,7 @@ class ProductController{
             return view('CreateProduct');
         }else{
             $nome = $_POST['name'];
-            $quant = $_POST['qtd'];
+            $quant = $_POST['quant'];
             $categoria = $_POST['categoria'];
             $descricao = $_POST['descricao'];
             $preco = $_POST['preco'];
