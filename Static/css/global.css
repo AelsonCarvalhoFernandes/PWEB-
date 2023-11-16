@@ -1,5 +1,25 @@
+* {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    outline: none;
+}
+
 body {
-    background: rgb(29, 29, 29);
+    background-color: #1e1e1e;
+    color: #fff;
+
+}
+
+.maxWidth {
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+    margin-left: 15vw;
+    margin-right: 15vw;
+}
+
+.group-horizontal {
+    display: flex;
+    flex-direction: column;
 }
 
 .GradientBarrAnimation {
@@ -10,11 +30,11 @@ body {
     animation: gradientMoving 10s linear infinite;
 }
 
-.shadowBarrTop{
+.shadowBarrTop {
     box-shadow: 0px -1px rgb(33, 33, 33, 50%);
 }
 
-.shadowBarrBotton{
+.shadowBarrBotton {
     box-shadow: 0px 1px rgb(33, 33, 33, 50%);
 }
 
