@@ -13,14 +13,27 @@
             </span>
         </div>
         <div class="profile">
-            <button class="material-symbols-outlined money">
-                payments
-            </button>
+        
+            <a class="material-symbols-outlined button" href="#">inventory_2</a>
 
-            <button class="material-symbols-outlined">
-                account_circle
-            </button>
-        </div>
+            <?php if ($_SESSION['user']['type'] == 'vendedor'): ?>
+                <a class="material-symbols-outlined button">add_box</a>
+            <?php endif; ?>
+
+        
+            <a class="material-symbols-outlined money button">
+                payments
+            </a>
+
+
+            <div class="dropdown">
+                <button class="dropbtn material-symbols-outlined">account_circle</button>
+                <div class="dropdown-content">
+                    <a href="/perfil">Perfil</a>
+                    <a href="/logout">Sair</a>
+                </div>
+            </div>
+
     </header>
     <div class="GradientBarrAnimation shadowBarrBotton"></div>
 </body>

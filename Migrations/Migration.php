@@ -1,6 +1,6 @@
 <?php
 
-require_once './Services/DatabaseConnection.php';
+require_once '../Services/DatabaseConnection.php';
 
 class Migration{
 
@@ -29,7 +29,8 @@ class Migration{
                 rg varchar(15) not null,
                 cpf varchar(15) not null,
                 telefone varchar(15) not null,
-                foto_url varchar(300)
+                foto_url varchar(300),
+                type varchar(10) not null
             );
         ';
 
@@ -40,8 +41,8 @@ class Migration{
         $sql = '
             create table cliente_endereco(
                 id int auto_increment primary key, 
-                logradouro varchar(100) not null, 
-                cidade varchar(50) not null, 
+                logradouro varchar(100), 
+                cidade varchar(50), 
                 uf varchar(2), 
                 pais varchar(30), 
                 n_residencia int, 
@@ -63,7 +64,8 @@ class Migration{
                 cnpj_cpf varchar(15) not null,
                 telefone varchar(15) not null,
                 carteira float,
-                foto_url varchar(300)
+                foto_url varchar(300),
+                type varchar(10) not null
             );
         ';
 
@@ -74,8 +76,8 @@ class Migration{
         $sql = '
             create table cliente_vendedor(
                 id int auto_increment primary key, 
-                logradouro varchar(100) not null, 
-                cidade varchar(50) not null, 
+                logradouro varchar(100), 
+                cidade varchar(50), 
                 uf varchar(2), 
                 pais varchar(30), 
                 n_residencia int, 

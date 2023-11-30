@@ -11,6 +11,7 @@ function verifyCheckbox() {
     var linkLogin = document.querySelector('a');
 
     if (checkbox.checked) {
+
         labelRg_Cnpj.innerText = 'RG / CNPJ';
         labelCpf_Cnpj.innerText = 'CPF / CNPJ';
 
@@ -27,6 +28,7 @@ function verifyCheckbox() {
         linkLogin.style.color = '#1e1e1e';
 
     } else {
+
         labelRg_Cnpj.innerText = 'RG';
         labelCpf_Cnpj.innerText = 'CPF';
 
@@ -62,11 +64,27 @@ function validationForm() {
         confirmPasswordInput.style.border = '1px solid #1e1e1e';
 
         if (form.checkValidity()) {
-            form.submit();
+            verifyRoute(form);
+            //form.submit();
         } else {
             form.reportValidity();
         }
     }
+}
+
+
+function verifyRoute(form) {
+
+    var checkbox = document.getElementById('checkVendedor');
+
+    if (checkbox.checked) {
+        form.action = 'register/seller';
+    } else {
+        form.action = 'register/user';
+    }
+
+    form.method = 'post';
+    form.submit();
 }
 
 

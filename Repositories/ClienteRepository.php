@@ -11,11 +11,13 @@ class ClienteRepository{
         $this->connection = new DatabaseConnection();
     }
 
-    public function insert($username, $email, $password, $rg, $cpf, $telefone){
+    
+
+    public function insert($username, $email, $password, $rg, $cpf, $telefone, $tipo){
        $conn = $this->connection->getConnection();
-       echo 'chegou aqui';
+       // echo 'chegou aqui';
        $sql = "
-            insert into Cliente (username, email, password, rg, cpf, telefone) values ('$username', '$email', '$password', '$rg', '$cpf', '$telefone');
+            insert into Cliente (username, email, password, rg, cpf, telefone, type) values ('$username', '$email', '$password', '$rg', '$cpf', '$telefone', '$tipo');
        ";
 
        $conn->execute_query($sql);
@@ -40,6 +42,7 @@ class ClienteRepository{
         return $data;
     }
 
+    /*
     function selectByEmail($email){
         $conn = $this->connection->getConnection();
         $sql = "select * from Cliente where email = $email";
@@ -47,7 +50,35 @@ class ClienteRepository{
         $data = $conn->execute_query($sql);
         $conn->close();
         return $data;
+    }*/
+
+    function selectByEmail($email){
+        $conn = $this->connection->getConnection();
+    
+        // Use um marcador de posição (?) para o valor do e-mail
+        $sql = "SELECT * FROM Cliente WHERE email = ?";
+        
+        // Preparar a consulta usando prepared statement
+        $stmt = $conn->prepare($sql);
+    
+        // Verificar se a preparação da consulta foi bem-sucedida
+        if ($stmt) {
+            
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+    
+            $result = $stmt->get_result();
+
+            $stmt->close();
+            $conn->close();
+    
+            return $result;
+        } else {
+            
+            return false;
+        }
     }
+    
 
     function deleteById($id){
         $conn = $this->connection->getConnection();

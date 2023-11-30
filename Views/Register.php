@@ -68,7 +68,7 @@
         <br>
         <button id="btnSubmit" name="btnSubmit" type="button" onclick="validationForm()">Salvar</button>
         
-        <a href="">Já tenho uma conta</a>
+        <a href="/login">Já tenho uma conta</a>
     </form>
 </body>
 

@@ -22,18 +22,21 @@ $route = [
 
         // Authentication Controller
         "/register" => fn() => $authController->register(),
-
+        "/login" => fn() => $authController->login(),
+        
 
         "/perfil" => fn() => $authenticatedController->perfil(),
 
         // Product Controller
         "/product/create" => fn() => $productController->createProduct(),
-
         //"/product/[1-~]/" => fn() => '',
+        "/logout" => fn() => $authController->logout(),
     ],
     "POST" => [
-        "/register" => fn() => $authController->registerValidate(),
+        "/register/user" => fn() => $authController->registerValidate(),
+        "/register/seller" => fn() => $authController->registerValidateVendedor(),
 
-        "/product/create" => fn() => $productController->createProduct(),
+        "/login" => fn() => $authController->loginValidate(),
+
     ]
 ];

@@ -8,13 +8,13 @@ class VendedorRepository{
 
     function __construct()
     {
-        $connection = new DatabaseConnection();
+        $this->connection = new DatabaseConnection();
     }
 
-    function insert($username, $email, $password, $rg, $cpf, $telefone){
+    function insert($username, $email, $password, $rg, $cpf, $telefone, $tipo){
        $conn = $this->connection->getConnection();
        $sql = "
-            insert into Vendedor (username, email, password, rg, cpf, telefone) values ('$username', '$email', '$password', '$rg', '$cpf', '$telefone');
+            insert into Vendedor (username, email, password, cnpj_rg, cnpj_cpf, telefone, type) values ('$username', '$email', '$password', '$rg', '$cpf', '$telefone', '$tipo');
        ";
 
        $conn->execute_query($sql);
@@ -42,11 +42,24 @@ class VendedorRepository{
 
     function selectByEmail($email){
         $conn = $this->connection->getConnection();
-        $sql = "select * from Vendedor where email = $email";
+        $sql = "SELECT * FROM Vendedor WHERE email = ?";
+        $stmt = $conn->prepare($sql);
+    
+        if ($stmt) {
+            
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+    
+            $result = $stmt->get_result();
 
-        $data = $conn->execute_query($sql);
-        $conn->close();
-        return $data;
+            $stmt->close();
+            $conn->close();
+    
+            return $result;
+        } else {
+            
+            return false;
+        }
     }
 
     function deleteById($id){
