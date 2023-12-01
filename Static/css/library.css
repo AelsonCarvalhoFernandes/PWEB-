@@ -32,9 +32,11 @@ h1 {
 }
 
 .card {
+    border-radius: 1vw;
+    background: transparent;
     overflow: hidden;
     max-width: 15vw;
-    min-height: 30vw;
+    min-height: 20vw;
     max-height: 30vw;
     display: flex;
     flex-direction: column;
@@ -48,7 +50,6 @@ h1 {
 
 .card:hover {
     cursor: pointer;
-    border: 0.1vw solid #00ddff;
     border-radius: 0.6vw;
     box-shadow: 0px 0px 3vw #00ccff;
 }

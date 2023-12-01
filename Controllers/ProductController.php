@@ -41,9 +41,74 @@ class ProductController{
 
             header("Location: /perfil");
             exit();
-            
+
         } catch (Exception $e) {
             echo $e->getMessage();
         }
     }
+
+
+
+    function productToId(){
+
+        if (isset($_GET['idElement'])) {
+            $id = $_GET['idElement'];
+            $id_cliente = $_SESSION['user']['id'];
+
+            if ($id !== null) {
+                $data = $this->productRepository->selectById($id);
+                $dataVenda = $this->productRepository->selectVendaById($id_cliente, $id);
+                
+                $viewData = [
+                    "data" => $data,
+                    "dataVenda" => $dataVenda
+                ];
+
+                return view('DescriptionProduct', $viewData);
+            } else {
+                echo "ID não fornecido ou inválido";
+            }
+        } else {
+            echo "ID não encontrado na consulta GET";
+        }
+    }
+
+
+    function buyProduct(){
+        try {
+            $id = $_POST['idElementProduct'];
+            $id_cliente = $_SESSION['user']['id'];
+            $data = $this->productRepository->selectById($id);
+    
+            $this->productRepository->buyProduct($id, $id_cliente, $data["id_vendedor"], $data["preco"]);
+            header("Location: /");
+            $this->productRepository->closeConnection();
+            exit();
+    
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+
+
+/*
+    function selectProductsByIdCliente(){
+        $id = $_SESSION['user']['id'];
+
+        $dataProducts = $this->productRepository->selectProductsByIdCliente($id);
+        $this->productRepository->closeConnection();
+        return view('Library', $dataProducts);
+    }*/
+     
+
+
+    /*
+    function selectProductByIdVendedor() {
+        $id = $_SESSION['user']['id'];
+
+        $dataProducts = $this->productRepository->selectProductByIdVendedor($id);
+        $this->productRepository->closeConnection();
+        return view('Library', $dataProducts);
+    }*/
 }

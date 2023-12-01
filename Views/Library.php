@@ -13,11 +13,72 @@
 </head>
 
 <body>
-    <?php include_once('Fragments/header.php'); ?>
-    
-    <main class="maxWidth group-horizontal">
+    <?php 
+        if (isset($_SESSION['user'])) {
+            include('./Views/Fragments/header.php');
+        } else {
+            include("./Views/Fragments/headerNotAuthenticad.php");
+        }
+    ?>
 
-        <!-- Title Inventory and Icon -->
+
+
+
+
+    <form class="maxWidth" id="productForm" action="/product" method="get">
+        <input type="hidden" name="idElementProd" id="idElement">
+
+        <div class="titleInventory">
+            <span class="material-symbols-outlined">
+                inventory_2
+            </span>
+            <h1>
+                Inventário
+            </h1>
+        </div>
+
+        <?php 
+
+            if (!empty($dataProducts)) {
+                
+                $count = 0;
+
+                echo '<div class="group-card">';
+                foreach ($dataProducts as $product) {
+                    echo '<button class="card">';
+                    echo '<img src="' . $product['url_image'] .'" alt="Model Image" class="item ">';
+                    echo '<div class="productDescription">';
+                    echo '<h2>' . $product['nome'] .'</h2>';
+                    echo '<div class="tag">';
+                    echo '<h3>' . $product['categoria'] .'</h3>';
+                    echo '<span>Adquirido</span>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</button>';
+                    $count++;
+
+                    if ($count % 3 == 0) {
+                        echo '</div>';
+                        echo '<div class="group-card">';
+                    }
+                }
+                echo '</div>';
+                
+            } else {
+                echo "Nenhum produto disponível.";
+            }
+        ?>
+    </form>
+
+
+
+
+
+
+
+    
+    <!--main class="maxWidth group-horizontal">
+
         <div class="titleInventory">
             <span class="material-symbols-outlined">
                 inventory_2
@@ -27,7 +88,6 @@
             </h1>
         </div>
         
-        <!-- Cards dos produtos comprados -->
         <div class="group-card">
             <div class="card">
                 <img src="https://source.unsplash.com/random/250x250/?model" alt="Model Image" class="item ">
@@ -74,7 +134,6 @@
             </div>
         </div>
 
-        <!-- Cards dos produtos comprados -->
         <div class="group-card">
             <div class="card">
                 <img src="https://source.unsplash.com/random/250x250/?model" alt="Model Image" class="item ">
@@ -121,7 +180,7 @@
             </div>
         </div>
 
-    </main>
+    </main-->
 
 
 

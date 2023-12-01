@@ -4,7 +4,9 @@
 
 <header>
         <div class="logo">
-
+        <a href="/" class="material-symbols-outlined button">
+            home
+        </a>
         </div>
         <div class="search">
             <input type="search" name="" id="">
@@ -14,7 +16,7 @@
         </div>
         <div class="profile">
         
-            <a class="material-symbols-outlined button" href="#">inventory_2</a>
+            <a class="material-symbols-outlined button" href="/library">inventory_2</a>
 
             <?php if ($_SESSION['user']['type'] == 'vendedor'): ?>
                 <a href="product/create" class="material-symbols-outlined button">add_box</a>

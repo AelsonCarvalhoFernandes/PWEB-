@@ -75,6 +75,15 @@ class VendedorRepository{
         }
     }
 
+    function updateCarteira($id, $valor){
+        $conn = $this->connection->getConnection();
+        $sql = "update Vendedor set carteira = $valor where id = $id;
+        ";
+
+        $conn->execute_query($sql);
+        $conn->close();
+    }
+
     function deleteById($id){
         $conn = $this->connection->getConnection();
         $sql = "delete from Vendedor where id = $id";

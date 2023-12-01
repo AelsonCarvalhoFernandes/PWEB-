@@ -6,6 +6,17 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 50px;
+    gap: 1%;
+}
+
+.card {
+    min-height: 29vw;
+    min-width: 20vw;
+    background: transparent;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.103);
+    overflow: hidden;
+    cursor: pointer;
 }
 
 img {

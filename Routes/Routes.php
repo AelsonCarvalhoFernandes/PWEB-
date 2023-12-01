@@ -27,10 +27,13 @@ $route = [
 
         "/perfil" => fn() => $authenticatedController->perfil(),
 
-        // Product Controller
+        "/product" => fn() => $productController->productToId(),
+
+        "/library" => fn() => $authenticatedController->library(),
+
+
         "/product/create" => fn() => $productController->product(),
 
-        //"/product/[1-~]/" => fn() => '',
         "/logout" => fn() => $authController->logout(),
     ],
     "POST" => [
@@ -41,6 +44,8 @@ $route = [
 
         "/updateProfile" => fn() => $authenticatedController->updateProfile(),
 
+        "/product" => fn() => $productController->buyProduct(),
         "/product/create" => fn() => $productController->createProduct(),
+
     ]
 ];

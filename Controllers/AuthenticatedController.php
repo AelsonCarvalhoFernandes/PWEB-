@@ -3,6 +3,7 @@
 require_once './Services/Engine.php';
 require_once './Repositories/ClienteRepository.php';
 require_once './Repositories/VendedorRepository.php';
+require_once './Repositories/ProductsRepository.php';
 
 class AuthenticatedController{
 
@@ -12,6 +13,8 @@ class AuthenticatedController{
     function __construct(){
         $this->clienteRepository = new ClienteRepository();
         $this->vendedorRepository = new VendedorRepository();
+        $this->productRepository = new ProductRepository();
+
     }
 
     function perfil(){
@@ -69,4 +72,28 @@ class AuthenticatedController{
             exit();
         }
     }
+
+    function library() {
+        if (isset($_SESSION['user'])) {
+            $id = $_SESSION['user']['id'];
+    
+            if ($_SESSION['user']['type'] == 'cliente') {
+                $dataProducts = $this->productRepository->selectProductsByIdCliente($id);
+            } else {
+                $dataProducts = $this->productRepository->selectProductsByIdCliente($id);
+            }
+    
+            // Crie um array associativo com uma chave para os dados
+            $viewData = [
+                'dataProducts' => $dataProducts,
+            ];
+    
+            return view('Library', $viewData);
+    
+        } else {
+            header("Location: /login");
+            exit();
+        }
+    }    
+    
 }

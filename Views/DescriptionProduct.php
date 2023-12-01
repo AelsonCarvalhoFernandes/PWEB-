@@ -5,34 +5,71 @@
     <link rel="stylesheet" href="../Static/css/header.css">
     <link rel="stylesheet" href="../Static/css/descriptionProduct.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,100,0,200" />
+    <script src="../Static/js/Product.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>NZ - Descrição</title>
 </head>
 <body>
-    <?php include 'Fragments/header.php'; ?>
 
-    <div class='maxWidth'>
+    <?php 
+        if (isset($_SESSION['user'])) {
+            include './Views/Fragments/header.php';
+        } else {
+            include './Views/Fragments/headerNotAuthenticad.php';
+        }
+    ?>
 
-        <div class="containerProduct">
-            <div class="img">
-                <img src="https://source.unsplash.com/random/700x480/?model" alt="Model Image">
-            </div>
+    <form class='maxWidth' id="fromDescriptionProduct" action="product" method="post">
+        
 
-            <div class="description">
-                <h1 class="titleProduct">
-                    Título do produto
-                </h1>
-                <h2> Preço: R$: 0,00</h2>
+        <?php
+            echo '<input type="hidden" name="idElementProduct" id="idElementProduct" value="'. $data['id'] .'">';
+            if (!empty($data)) {
+                
+                echo '<div class="containerProduct">';
+                echo '<div class="img">';
+                echo '<img src="../' . $data['url_image'] . '" alt="Model Image">';
+                echo '</div>';
 
-                <button class="acquire">
-                    <i class="material-symbols-outlined">shopping_bag</i>Adquirir
-                </button>
-                 
-                <p class="textDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </div>
-        </div>
-    </div>
+                echo '<div class="description">';
+                echo '<h1 class="titleProduct">';
+                echo $data['nome'];
+                echo '</h1>';
+                echo '<h2> Preço: R$: ' . $data['preco'] . '</h2>';
+
+                if (isset($_SESSION['user'])) {
+
+                    if (isset($dataVenda['id_produto']) && $dataVenda['id_produto'] == $data['id'] && $dataVenda['id_cliente'] == $_SESSION['user']['id']) {
+                        echo '<button class="acquire" disabled>';
+                        echo '<i class="material-symbols-outlined">shopping_bag</i>Você já possui esse produto';
+                        echo '</button>';
+
+                    } else {
+                        echo '<button class="acquire" onclick="confirmBuy()">';
+                        echo '<i class="material-symbols-outlined">shopping_bag</i>Adquirir';
+                        echo '</button>';
+                    }
+                    
+                } else {
+                    echo '<button class="acquire" onclick="alert(\'Você precisa estar logado para adquirir um produto.\')" disabled>';
+                    echo '<i class="material-symbols-outlined">shopping_bag</i>Faça Login para Adquirir';
+                    echo '</button>';
+                }
+                
+                
+                echo '<p class="textDescription">' . $data['descricao'] . '</p>';
+                echo '</div>';
+                echo '</div>';
+
+            } else {
+                echo "<h2>Nenhum produto disponível.</h2>";
+            }
+            
+
+        ?>
+        
+    </form>
 </body>
 </html>

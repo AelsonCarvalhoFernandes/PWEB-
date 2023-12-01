@@ -20,12 +20,7 @@ class HomeController{
             "products" => [],
             "promotions" => null
         ];
-
-        /*
-        while($row = $queryOnce->fetch_assoc()){
-            $data["products"][] = $row;
-        }*/
-
+        
         while ($row = $queryOnce->fetch_array()) {
             $data["products"][] = $row;
         }
