@@ -1,0 +1,115 @@
+.titleInventory {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+
+.titleInventory span {
+    font-size: 2.5vw;
+    font-weight: bold;
+    background-color: transparent;
+}
+
+.titleInventory span,
+.titleInventory h1 {
+    text-shadow: 0px 0px 5px #00ccff;
+}
+
+h1 {
+    font-size: 2vw;
+}
+
+/* Estilo dos cards */
+
+.group-card {
+    width: 100%;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5vw;
+    gap: 2.5vw;
+}
+
+.card {
+    overflow: hidden;
+    max-width: 15vw;
+    min-height: 30vw;
+    max-height: 30vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.card img {
+    border-radius: 0.5vw;
+    width: 15vw;
+    height: 20vw;
+}
+
+.card:hover {
+    cursor: pointer;
+    border: 0.1vw solid #00ddff;
+    border-radius: 0.6vw;
+    box-shadow: 0px 0px 3vw #00ccff;
+}
+
+.productDescription h2,
+.productDescription h3,
+.productDescription span,
+.card img {
+    text-shadow: 0px 0px 10px rgba(12, 0, 69, 0.75);
+    color: rgb(255, 255, 255);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/*
+.productDescription h2 {
+    font-size: 1.4em;
+    font-weight: bolder;
+    padding-bottom: 0.3vw;
+    max-width: 14.4vw;
+}*/
+
+.productDescription {
+    margin-top: auto;
+}
+
+.productDescription h2 {
+    font-size: 1.4em;
+    font-weight: bolder;
+    padding-bottom: 0.3vw;
+    /* Mude para 'normal' para permitir que o texto quebre de linha */
+    white-space: normal;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    /* Ajuste conforme necessário para limitar a altura */
+    max-height: 2.8em;
+
+    text-overflow: ellipsis;
+}
+
+.productDescription h3 {
+    font-size: 1vw;
+    font-weight: bolder;
+    padding-bottom: 0.3vw;
+}
+
+.productDescription span {
+    background: greenyellow;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+    margin-top: 0.1vw;
+    margin-bottom: 0.1vw;
+    border-radius: 0.4vw;
+    font-weight: bold;
+    font-size: 1vw;
+}
+
+.tag {
+    margin-top: auto;
+}

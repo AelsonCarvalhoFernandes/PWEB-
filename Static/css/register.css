@@ -1,0 +1,118 @@
+body {
+    background-color: #1e1e1e;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+form {
+    padding: 5%;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+    font-size: 1vw;
+    border-radius: 0.5vw;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    box-shadow: 0px 0px 10px 0px #aa00ff;
+}
+
+h1 {
+    color: #aa00ff;
+    font-size: 3vw;
+    text-shadow: 0px 0px 10px rgba(166, 0, 249, 0.399);
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+.containerLabels {
+    display: flex;
+    justify-content: space-between;
+}
+
+.containerPassword,
+.containeIdentity {
+    display: flex;
+    align-items: center;
+    gap: 2vw;
+    align-self: normal;
+    justify-content: space-between;
+}
+
+label {
+    color: #1e1e1e;
+    font-size: 1.2vw;
+}
+
+input[type=text],
+input[type=email],
+input[type=password] {
+    padding: 0.6vw;
+    font-size: 1.2vw;
+    border: 1px solid #aa00ff;
+    border-radius: 15vw;
+    color: #1e1e1e;
+}
+
+input[type=text]:hover,
+input[type=email]:hover,
+input[type=password]:hover {
+    border: 1px solid #aa00ff;
+    box-shadow: 0px 0px 10px 0px #aa00ff58;
+}
+
+.checkUserVendedor {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+input[type=checkbox] {
+    accent-color: #42ffff;
+    transform: scale(1.5);
+}
+
+input[type=checkbox],
+.labelVendedor {
+    height: 1.2vw;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+input[type=checkbox]:hover {
+    transition: 1s;
+    transform: scale(1.1);
+}
+
+button[type=button] {
+    padding: 0.5vw;
+    font-size: 1.2vw;
+    font-weight: bold;
+    border: none;
+    border-radius: 10vw;
+    background: #aa00ff;
+    color: white;
+    cursor: pointer;
+}
+
+button[type=button]:hover {
+    color: white;
+    background: linear-gradient(to right, #00fbff, #0000ff, #c800ff);
+    box-shadow: 0px 0px 10px 0px #42ffff;
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+
+a {
+    color: #aa00ff;
+    font-size: 1svw;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 1vw;
+}
+
+a:hover {
+    color: #1e1e1e;
+    transition: 1s;
+    transform: scale(1.1);
+}

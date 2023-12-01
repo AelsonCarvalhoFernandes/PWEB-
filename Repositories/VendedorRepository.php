@@ -1,28 +1,46 @@
 <?php
 
-include '../Services/DatabaseConnection.php';
+include_once './Services/DatabaseConnection.php';
 
 class VendedorRepository{
 
-    public $connection = new DatabaseConnection();
+    public $connection;
 
-    function insert($username, $email, $password, $rg, $cpf, $telefone){
+    function __construct()
+    {
+        $this->connection = new DatabaseConnection();
+    }
+
+    function insert($username, $email, $password, $rg, $cpf, $telefone, $tipo){
        $conn = $this->connection->getConnection();
        $sql = "
-            insert into Vendedor (username, email, password, rg, cpf, telefone) values ('$username', '$email', '$password', '$rg', '$cpf', '$telefone');
+            insert into Vendedor (username, email, password, cnpj_rg, cnpj_cpf, telefone, type) values ('$username', '$email', '$password', '$rg', '$cpf', '$telefone', '$tipo');
        ";
 
        $conn->execute_query($sql);
        $conn->close();
     }
 
-    function update($id, $username, $email, $password, $rg, $cpf, $telefone){
+    function update($id, $username, $email, $rg, $cpf, $telefone, $type){
         $conn = $this->connection->getConnection();
-        $sql = "update Vendedor set username = $username, email = $email, password = $password, rg = $rg, cpf = $cpf, telefone = $telefone where id = $id;
-        ";
+        /*
+        $sql = "update Vendedor set username = $username, email = $email, password = $password, cnpj_rg = $rg, cnpj_cpf = $cpf, telefone = $telefone where id = $id;
+        ";*/
 
-        $conn->execute_query($sql);
+        $stmt = $conn->prepare("UPDATE Vendedor SET username = ?, email = ?, cnpj_rg = ?, cnpj_cpf = ?, telefone = ?, type = ? WHERE id = ?");
+
+        if ($stmt) {
+            $stmt->bind_param("ssssssi", $username, $email, $rg, $cpf, $telefone, $type, $id);
+    
+            $stmt->execute();
+            $stmt->close();
+        }
+    
         $conn->close();
+
+        /*
+        $conn->execute_query($sql);
+        $conn->close();*/
     }
 
     function selectById($id){
@@ -37,11 +55,24 @@ class VendedorRepository{
 
     function selectByEmail($email){
         $conn = $this->connection->getConnection();
-        $sql = "select * from Vendedor where email = $email";
+        $sql = "SELECT * FROM Vendedor WHERE email = ?";
+        $stmt = $conn->prepare($sql);
+    
+        if ($stmt) {
+            
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+    
+            $result = $stmt->get_result();
 
-        $data = $conn->execute_query($sql);
-        $conn->close();
-        return $data;
+            $stmt->close();
+            $conn->close();
+    
+            return $result;
+        } else {
+            
+            return false;
+        }
     }
 
     function deleteById($id){
