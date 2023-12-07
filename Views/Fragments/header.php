@@ -24,7 +24,7 @@
 
             <?php if ($_SESSION['user']['type'] == 'seller'): ?>
                 <div class="nameAndIcon">
-                    <a href="product/create" id="iconPublication" class="material-symbols-outlined button">add_box</a>
+                    <a href="/product/create" id="iconPublication" class="material-symbols-outlined button">add_box</a>
                     <label class="labelIcon" for="iconPublication">PUBLICAÇÃO</label>
                 </div>
                 <a class="material-symbols-outlined money button">
