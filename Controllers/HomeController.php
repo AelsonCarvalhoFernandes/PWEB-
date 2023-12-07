@@ -5,24 +5,23 @@ require_once './Repositories/ProductsRepository.php';
 
 class HomeController{
 
-    private $productRepository; 
-    function __construct(){
-        $this->productRepository = new ProductRepository();
+    public $productRepository;
+
+    function __construct() {
+        $this->productRepository = new ProductRepository(); 
     }
 
-    function home(){
-
-        $queryOne = $this->productRepository->selectAllLimited();
+    function home() {
+        $queryOnce = $this->productRepository->selectAll();
 
         $data = [
-            "products" => $queryOne->fetch_assoc(),
+            "products" => [],
             "promotions" => null
         ];
-
-        return view("Home", $data);
-    }
-
-    function contact(){
         
+        while ($row = $queryOnce->fetch_array()) {
+            $data["products"][] = $row;
+        }
+        return view('Home', $data);
     }
 }

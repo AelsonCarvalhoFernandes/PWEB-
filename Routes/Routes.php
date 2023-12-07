@@ -2,9 +2,7 @@
 
 include_once './Controllers/HomeController.php';
 include_once './Controllers/AuthController.php';
-
 include_once './Controllers/AuthenticatedController.php';
-
 include_once './Controllers/ProductController.php';
 
 $homeController = new HomeController();
@@ -18,22 +16,30 @@ $route = [
         // Home Controller
         "/" => fn() => $homeController->home(),
         "/home" => fn() => $homeController->home(),
-        "/contact" => fn() => $homeController->contact(),
 
         // Authentication Controller
         "/register" => fn() => $authController->register(),
 
+        "/login" => fn() => $authController->login(),
+        "/logout" => fn() => $authController->logout(),
+        
+        "/profile" => fn() => $authenticatedController->profile(),
 
-        "/perfil" => fn() => $authenticatedController->perfil(),
+        "/product" => fn() => $productController->productToId(),
+        "/product/create" => fn() => $productController->product(),
 
-        // Product Controller
-        "/product/create" => fn() => $productController->createProduct(),
+        "/library" => fn() => $authenticatedController->library(),       
 
-        //"/product/[1-~]/" => fn() => '',
     ],
     "POST" => [
         "/register" => fn() => $authController->registerValidate(),
 
+        "/login" => fn() => $authController->loginValidate(),
+
+        "/updateProfile" => fn() => $authenticatedController->updateProfile(),
+
+        "/product" => fn() => $productController->buyProduct(),
         "/product/create" => fn() => $productController->createProduct(),
+
     ]
 ];

@@ -6,7 +6,7 @@ class DatabaseConnection{
 
     public $DATABASE_HOST = "localhost";
     public $DATABASE_USERNAME = "root"; 
-    public $DATABASE_PASSWORD = "12345"; 
+    public $DATABASE_PASSWORD = ""; 
     public $DATABASE_NAME = "nozama";
     public $DATABASE_PORT = "3306";
 
@@ -19,4 +19,7 @@ class DatabaseConnection{
         return $this->connection;
     }
 
+    public function close() {
+        $this->connection->close();
+    }
 }
