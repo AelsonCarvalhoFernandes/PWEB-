@@ -1,0 +1,46 @@
+.titleInventory {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+
+.titleInventory span {
+    font-size: 2.5vw;
+    font-weight: bold;
+    background-color: transparent;
+}
+
+.titleInventory span,
+.titleInventory h1 {
+    text-shadow: 0px 0px 5px #00ccff;
+}
+
+h1 {
+    font-size: 2vw;
+}
+
+/* Estilo dos cards */
+
+.infoCard span {
+    text-shadow: 0px 0px 10px rgba(12, 0, 69, 0.75);
+    color: rgb(255, 255, 255);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0.5vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    margin-top: 0.1vw;
+    margin-bottom: 0.1vw;
+    border-radius: 0.4vw;
+    font-weight: bold;
+    font-size: 1vw;
+}
+
+.statusPosted {
+    background: rgb(47, 158, 255);
+}
+
+.statusBuy {
+    background: rgb(255, 255, 0);
+}
