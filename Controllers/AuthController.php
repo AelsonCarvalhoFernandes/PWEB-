@@ -1,92 +1,61 @@
 <?php
 
 require_once './Services/Engine.php';
-require_once './Repositories/ClienteRepository.php';
-require_once './Repositories/VendedorRepository.php';
+require_once './Repositories/UserRepository.php';
+require_once './Repositories/SellerRepository.php';
+require_once './Repositories/ClientRepository.php';
+require_once './Repositories/AddressUserRepository.php';
 
 class AuthController{
 
-    private $clienteRepository;
+    private $clientRepository;
+    private $sellerRepository;
+    private $userRepository;
+    private $addressUserRepository;
 
     function __construct(){
-        $this->clienteRepository = new ClienteRepository();
-        $this->vendedorRepository = new VendedorRepository();
+        $this->userRepository = new UserRepository();
+        $this->clientRepository = new ClientRepository();
+        $this->sellerRepository = new SellerRepository();
+        $this->addressUserRepository = new AddressUserRepository();
     }
 
-    function register(){
-        return view('Register');
+    /* 
+        Inicia a Sessão e armazena os dados do usuário 
+    */
+    private function startSession($userData) {
+        session_start();
+        $_SESSION['user'] = $userData;
     }
 
+    /*
+        Finaliza a Sessão 
+    */
+    private function endSession() {
+        session_start();
+        session_destroy();
+    }
+
+    /*
+        Encaminha para a tela de login
+    */
     function login(){  
+        if (isset($_SESSION['user'])) {
+            header("Location: /");
+            exit(); 
+        }
         return view('Login');
     }
 
-    function registerValidate(){
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $confPassword = $_POST['confirm_password'];
-        $email = $_POST['email'];
-        $rg = $_POST['rg'];
-        $cpf = $_POST['cpf'];
-        $telefone = $_POST['telefone'];
-        $tipo = 'cliente';
-
-        if($password == $confPassword){
-            $this->clienteRepository->insert($username, $email, $password, $rg, $cpf, $telefone, $tipo);
-
-            header("Location: /login");
-            exit(); 
-        }
-
-        return view('Register', ['Error' => 'A senha não bate']);
-    }
-
-    function registerValidateVendedor(){
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $confPassword = $_POST['confirm_password'];
-        $email = $_POST['email'];
-        $rg = $_POST['rg'];
-        $cpf = $_POST['cpf'];
-        $telefone = $_POST['telefone'];
-        $tipo = 'vendedor';
-
-        if($password == $confPassword){
-            $this->vendedorRepository->insert($username, $email, $password, $rg, $cpf, $telefone, $tipo);
-
-            header("Location: /login");
-            $this->startSession($data);
-            exit(); 
-        }
-
-        return view('Register', ['Error' => 'A senha não bate']);
-    }
-
+    /*
+        Valida o login do usuário
+    */
     function loginValidate(){
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        $cliente = $this->clienteRepository->selectByEmail($email);
-
-        $data = $cliente->fetch_assoc();
-
-        if($data['password'] == $password){
-            $this->startSession($data);
-            header("Location: /");
-            exit(); 
-        }
-
-        $this->loginValidateVendedor();
-        // return view('Login', ['Error' => 'Email ou senha incorretos']);
-    }
-
-    function loginValidateVendedor(){
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-
-        $vendedor = $this->vendedorRepository->selectByEmail($email);
-
-        $data = $vendedor->fetch_assoc();
+        $user = $this->userRepository->selectByEmail($email);
+        $data = $user->fetch_assoc();
 
         if($data['password'] == $password){
             $this->startSession($data);
@@ -97,24 +66,71 @@ class AuthController{
         return view('Login', ['Error' => 'Email ou senha incorretos']);
     }
 
+    /*
+        Finaliza a sessão do usuário
+    */
     function logout(){
+        if (!isset($_SESSION['user'])) {
+            header("Location: /");
+            exit(); 
+        }
         $this->endSession();
-        //session_destroy();
         header("Location: /login");
         exit(); 
     }
 
-
-    private function startSession($userData) {
-        // Inicie a sessão e armazene as informações do usuário
-        session_start();
-        $_SESSION['user'] = $userData;
+    /*
+        Encaminha para a tela de registro
+    */
+    function register(){
+        if (isset($_SESSION['user'])) {
+            header("Location: /");
+            exit(); 
+        }
+        return view('Register');
     }
 
-    private function endSession() {
-        // Encerre a sessão
-        session_start();
-        session_destroy();
-    }
+    /*
+        Registra um novo usuário
+    */
+    function registerValidate(){
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $rg = $_POST['rg'];
+        $cpf = $_POST['cpf'];
+        $cellphone = $_POST['cellphone'];
+        $type = $_POST['type'];
+        $money = $_POST['money'];
 
+        $verifyUserExists = $this->userRepository->selectByEmail($email)->fetch_assoc() ;
+
+        if (empty($verifyUserExists)) {
+
+            $user = $this->userRepository->insert($username, $email, $password, $rg, $cpf, $cellphone, $type, $money);
+
+            if($user){
+                
+                $data_user = $this->userRepository->selectByEmail($email)->fetch_assoc() ;
+                $id_user = $data_user['id'];
+
+                if ($type == 'seller') {
+                    $seller = $this->sellerRepository->insert($id_user);
+                } else {
+                    $client = $this->clientRepository->insert($id_user);
+                }
+
+                $this->addressUserRepository->createUserAddress($id_user);                
+
+                $this->userRepository->closeConnection();
+
+                header("Location: /login");
+                return view('Login', ['Success' => 'Usuário cadastrado com sucesso']);
+            }  
+        } else {
+            return view('/register', ['Error' => 'Email já cadastrado']); 
+        }
+
+        return view('/register', ['Error' => 'Erro ao cadastrar usuário']);
+    }
 }

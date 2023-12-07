@@ -9,6 +9,12 @@
     box-shadow: 0px 0px 2vw #00ccff6d;
 }
 
+img {
+    width: 100%;
+    height: 31.4vw;
+
+}
+
 h1.titleProduct {
     text-shadow: 0px 0px 5px #00ccff;
     font-size: 2vw;
@@ -23,7 +29,7 @@ h1.titleProduct {
 
 .textDescription {
     color: rgb(151, 151, 151);
-    font-size: 0.8vw;
+    font-size: 1.2vw;
     text-align: justify;
 }
 

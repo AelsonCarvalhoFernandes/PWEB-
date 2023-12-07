@@ -7,11 +7,21 @@
     <link rel="stylesheet" href="../../Static/css/header.css">
 </head>
 
-<header class="headerNotAuthenticad">
-    <!--button class="btnRegister">REGISTRAR</button-->
-    <!--button class="btnLogin">ACESSAR</button-->
-    <a class="btnRegister" href="/register">REGISTRAR</a>
-    <a class="btnLogin" href="/login">ACESSAR</a>
+<header>
+    <div>
+        <a href="/">
+            <img class="img-logo" src="../../Static/img/Logo_Nozama.svg" alt="Nozama Games">
+        </a>
+    </div>
+
+    <div class="search">
+
+    </div>
+
+    <div class="profile headerNotAuthenticad">
+        <a class="btnRegister" href="/register">REGISTRAR</a>
+        <a class="btnLogin" href="/login">ACESSAR</a>
+    </div>
 </header>
 <div class="GradientBarrAnimation shadowBarrBotton"></div>
 

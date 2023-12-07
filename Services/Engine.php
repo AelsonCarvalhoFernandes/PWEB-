@@ -5,20 +5,7 @@ function view($view, $data = []){
 
     ob_start();
 
-    $dt = [];
-
-    if($_SESSION["UserSession"] != null){
-        $dt = [
-            "data" => $data,
-            "User" => $_SESSION["UserSession"]
-        ];
-    }else{
-        $dt = [
-            "data" => $data,
-        ];
-    }
-
-    extract($dt);
+    extract($data);
 
     require "./Views/{$view}.php";
 

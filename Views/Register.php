@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="../Static/css/global.css">
-    <link rel="stylesheet" href="../Static/css/header.css">
+
     <link rel="stylesheet" href="../Static/css/register.css">
     <script src="../Static/js/Register.js"></script>
     <link rel="stylesheet"
@@ -15,10 +15,22 @@
 
 <body>
 
+    <div class="centralize">
+        <a href="/">
+            <img class="img-logo" src="../../Static/img/Logo_Nozama_Dark.svg" alt="Nozama Games">
+        </a>
+    </div>
+
     <form class="formRegister maxWidth" action="register" method="post">
 
-        <h1>CADASTRO | USUÁRIO</h1>
+        <input type="hidden" name="money" id="money" value="0.00">
+
+        <p class="error-message"></p>
+
+        <h1>CADASTRO | Cliente</h1>
         <br>
+
+        <input type="hidden" name="type" id="type" value="client">
 
         <label for="username" id="labelUsername">Username</label>
         <input name="username" type="text" id="username" autofocus required>
@@ -26,6 +38,11 @@
 
         <label for="email">Email</label>
         <input name="email" type="email" id="email" required>
+        <?php
+            if (isset($Error)) {
+                echo '<p style="color: red;">' . $Error . '</p>';
+            }   
+        ?>
         <br>
 
         <!-- Senha e Confirmar Senha -->
@@ -48,15 +65,15 @@
 
         <div class="containeIdentity">
             <input name="rg" id="rg" type="text" oninput="formatRG()" onkeydown="clearField(event, this)"
-                onkeypress="allowNumbersOnly(event)" maxlength="13" required>
+                onkeypress="allowNumbersOnly(event)" minlength="13" maxlength="13" required>
 
             <input name="cpf" id="cpf" type="text" oninput="formatCPF()" onkeydown="clearField(event, this)"
-                onkeypress="allowNumbersOnly(event)" maxlength=" 14" required>
+                onkeypress="allowNumbersOnly(event)" minlength="14" maxlength=" 14" required>
         </div>
 
         <br>
-        <label for="telefone">Telefone</label>
-        <input name="telefone" id="telefone" type="text" onkeypress="allowNumbersOnly(event)" maxlength="15" required>
+        <label for="cellphone">Telefone</label>
+        <input name="cellphone" id="cellphone" type="text" onkeypress="allowNumbersOnly(event)" maxlength="15" required>
 
         <br>
         <div class="checkUserVendedor">

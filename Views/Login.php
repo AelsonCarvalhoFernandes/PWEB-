@@ -13,10 +13,15 @@
 
     <form action="login" method="POST">
 
+        <div class="centralize">
+            <a href="/">
+                <img class="img-logo" src="../../Static/img/Logo_Nozama_Dark.svg" alt="Nozama Games">
+            </a>
+        </div>
+
         <h1 class="login">LOGIN</h1>
 
         <?php
-            // Verifica se há uma mensagem de erro definida
             if (isset($Error)) {
                 echo '<p style="color: red;">' . $Error . '</p>';
             }
@@ -34,9 +39,15 @@
 
         <input type="submit">
 
-        <a href="/register">Ainda não tenho uma conta</a>
+        <br>
+        <label class="centralize" for="">_____________________ OU _____________________</label>
 
+        <a href="">Esqueci a Senha</a>
     </form>
+
+    <div class="body centralize maxWidth">
+        <a href="/register">Não tem uma conta? Cadastre-se</a>
+    </div>
 
 </body>
 

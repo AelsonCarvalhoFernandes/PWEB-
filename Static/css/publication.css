@@ -23,6 +23,22 @@ textarea {
     border: 1px solid white;
 }
 
+input[id="title"] {
+    font-size: 1vw;
+}
+
+input[id="category"] {
+    padding: 0.5vw;
+    font-size: 1vw;
+}
+
+input[id="quantity"],
+input[id="price"] {
+    padding: 1vw;
+    font-size: 1vw;
+    width: 50%;
+}
+
 .containerFile {
     position: relative;
     display: inline-block;

@@ -1,24 +1,21 @@
 function verifyCheckbox() {
     var checkbox = document.getElementById('checkVendedor');
-    var labelRg_Cnpj = document.getElementById('labelRg');
-    var labelCpf_Cnpj = document.getElementById('labelCpf');
 
     var form = document.querySelector('form');
     var btnSubmit = document.getElementById('btnSubmit');
 
     var h1 = document.querySelector('h1');
     var inputs = document.querySelectorAll('input[type="text"], input[type="email"], input[type="password"]');
+    var inputType = document.getElementById('type');
+
     var linkLogin = document.querySelector('a');
 
     if (checkbox.checked) {
 
-        labelRg_Cnpj.innerText = 'RG / CNPJ';
-        labelCpf_Cnpj.innerText = 'CPF / CNPJ';
-
         form.style.boxShadow = '0px 0px 10px 0px #42ffff';
         btnSubmit.style.backgroundColor = '#1e1e1e';
 
-        h1.innerText = 'CADASTRO | VENDEDOR';
+        h1.innerText = 'CADASTRO | Vendedor';
         h1.style.color = '#1e1e1e';
         h1.style.textShadow = 'none';
 
@@ -27,15 +24,14 @@ function verifyCheckbox() {
         });
         linkLogin.style.color = '#1e1e1e';
 
-    } else {
+        inputType.value = 'seller';
 
-        labelRg_Cnpj.innerText = 'RG';
-        labelCpf_Cnpj.innerText = 'CPF';
+    } else {
 
         form.style.boxShadow = '0px 0px 10px 0px #aa00ff';
         btnSubmit.style.backgroundColor = '#aa00ff';
 
-        h1.innerText = 'CADASTRO | USUÁRIO';
+        h1.innerText = 'CADASTRO | Cliente';
         h1.style.color = '#aa00ff';
         h1.style.textShadow = '0px 0px 10px rgba(166, 0, 249, 0.399)';
 
@@ -43,11 +39,14 @@ function verifyCheckbox() {
             input.style.border = '1px solid #aa00ff';
         });
         linkLogin.style.color = '#aa00ff';
+
+        inputType.value = 'client';
     }
 }
 
 
 function validationForm() {
+
     var form = document.querySelector('.formRegister');
     var password = document.getElementById('password').value;
     var confirmPasswordInput = document.getElementById('confirm_password');
@@ -64,27 +63,11 @@ function validationForm() {
         confirmPasswordInput.style.border = '1px solid #1e1e1e';
 
         if (form.checkValidity()) {
-            verifyRoute(form);
-            //form.submit();
+            form.submit();
         } else {
             form.reportValidity();
         }
     }
-}
-
-
-function verifyRoute(form) {
-
-    var checkbox = document.getElementById('checkVendedor');
-
-    if (checkbox.checked) {
-        form.action = 'register/seller';
-    } else {
-        form.action = 'register/user';
-    }
-
-    form.method = 'post';
-    form.submit();
 }
 
 

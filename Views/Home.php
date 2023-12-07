@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./Static/css/footer.css">
     <link rel="stylesheet" href="./Static/css/global.css">
     <link rel="stylesheet" href="./Static/css/home.css">
+    <script src="./Static/js/Home.js"></script>
 </head>
 <body>
 
@@ -19,148 +20,41 @@
         include("./Views/Fragments/headerNotAuthenticad.php");
     }
     ?>
-    
-
-    <!--?php
-    // Verificar se o usuário está autenticado
-    if (isset($_SESSION['user'])) {
-        // Acessar informações do usuário
-        $userData = $_SESSION['user'];
-
-        // Exibir informações do usuário
-        echo "<h2>Perfil do Usuário</h2>";
-        echo "<ul>";
-        foreach ($userData as $key => $value) {
-            echo "<li><strong>$key:</strong> $value</li>";
-        }
-        echo "</ul>";
-    } else {
-        // Se o usuário não estiver autenticado, redirecione ou exiba uma mensagem
-        //header("Location: login.php");
-        //exit();
-    }
-    ?-->
 
 
+    <form class="maxWidth" id="productForm" action="/product" method="get">
+        <input type="hidden" name="idCardProduct" id="idElement">
 
-    <div class="pageStore">
-        <div class="group-card">
-            <div class="card">
-                <img src="https://source.unsplash.com/random/250x250/?model" alt="Model Image" class="item ">
-                <div>
-                    <h2> Jogo 1</h2>
-                    <h3> Ação</h3>
-                    <span>R$ 10,99</span>
-                </div>
-            </div>
+        <?php 
+            if (!empty($data['products'])) {
+                $count = 0;
 
-            <div class="card">
-                <img src="https://source.unsplash.com/random/250x250/?model" alt="Model Image" class="item ">
-                <div>
-                    <h2> Jogo 1</h2>
-                    <h3> Ação</h3>
-                    <span>R$ 10,99</span>
-                </div>
-            </div>
+                echo '<div class="group-card">';
+                foreach ($data['products'] as $product) {
+                    echo '<button class="card" onclick="openDescriptionProduct(' . $product["id"] . ')">';
+                    echo '<img src="' . $product['url_image'] . '" alt="Imagem do Produto" class="item">';
+                    echo '<div class="infoCard">';
+                    echo '<h2>' . $product['name'] . '</h2>';
+                    echo '<h3> TAG: ' . $product['category'] . '</h3>';
+                    echo '<span>R$ ' . $product['price'] . '</span>';
+                    echo '</div>';
+                    echo '</button>';
+                    echo '<br>';
+                    $count++;
 
-            <div class="card">
-                <img src="https://source.unsplash.com/random/250x250/?model" alt="Model Image" class="item ">
-                <div>
-                    <h2> Jogo 1</h2>
-                    <h3> Ação</h3>
-                    <span>R$ 10,99</span>
-                </div>
-            </div>
-        </div>
+                    if ($count % 3 == 0) {
+                        echo '</div>';
+                        echo '<div class="group-card">';
+                    }
+                }
+                echo '</div>';
+                
+            } else {
+                echo '<br> <br> <br>';
+                echo "Nenhum produto disponível no momento.";
+            }
+        ?>
+    </form>
 
-        <div class="group-card">
-            <div class="card">
-                <img src="https://source.unsplash.com/random/250x250/?model" alt="Model Image" class="item ">
-                <div>
-                    <h2> Jogo 1</h2>
-                    <h3> Ação</h3>
-                    <span>R$ 10,99</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://source.unsplash.com/random/250x250/?model" alt="Model Image" class="item ">
-                <div>
-                    <h2> Jogo 1</h2>
-                    <h3> Ação</h3>
-                    <span>R$ 10,99</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://source.unsplash.com/random/250x250/?model" alt="Model Image" class="item ">
-                <div>
-                    <h2> Jogo 1</h2>
-                    <h3> Ação</h3>
-                    <span>R$ 10,99</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="group-card">
-            <div class="card">
-                <img src="https://source.unsplash.com/random/250x250/?model" alt="Model Image" class="item ">
-                <div>
-                    <h2> Jogo 1</h2>
-                    <h3> Ação</h3>
-                    <span>R$ 10,99</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://source.unsplash.com/random/250x250/?model" alt="Model Image" class="item ">
-                <div>
-                    <h2> Jogo 1</h2>
-                    <h3> Ação</h3>
-                    <span>R$ 10,99</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://source.unsplash.com/random/250x250/?model" alt="Model Image" class="item ">
-                <div>
-                    <h2> Jogo 1</h2>
-                    <h3> Ação</h3>
-                    <span>R$ 10,99</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="group-card">
-            <div class="card">
-                <img src="https://source.unsplash.com/random/250x250/?model" alt="Model Image" class="item ">
-                <div>
-                    <h2> Jogo 1</h2>
-                    <h3> Ação</h3>
-                    <span>R$ 10,99</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://source.unsplash.com/random/250x250/?model" alt="Model Image" class="item ">
-                <div>
-                    <h2> Jogo 1</h2>
-                    <h3> Ação</h3>
-                    <span>R$ 10,99</span>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://source.unsplash.com/random/250x250/?model" alt="Model Image" class="item ">
-                <div>
-                    <h2> Jogo 1</h2>
-                    <h3> Ação</h3>
-                    <span>R$ 10,99</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <?php include('./Views/Fragments/footer.php'); ?>  
 </body>
 </html>

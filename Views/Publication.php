@@ -6,29 +6,38 @@
     <link rel="stylesheet" href="../Static/css/global.css">
     <link rel="stylesheet" href="../Static/css/header.css">
     <link rel="stylesheet" href="../Static/css/publication.css">
+    <script src="../Static/js/Product.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,100,0,200" />
     <title>NZ - Publicação</title>
 </head>
 <body>
+
     <?php include_once "Fragments/Header.php"; ?>
     
-    <form class="maxWidth" action="" method="post">
+    <form class="formProduct maxWidth" action="create" method="post" enctype="multipart/form-data">
+
         <div class="alignHorizontal">
             <div class="containerLeft">
-                <input  type="text" placeholder="Título" autofocus>
+                <input type="text" name="title" id="title" placeholder="Título" required autofocus>
 
                 <div class="containerFile">
                     <label for="file" class="material-symbols-outlined">upload_file</label>
-                    <input id="file" type="file" class="fileInput">
+                    <input id="file" name="file" type="file" accept="image/*" class="fileInput" required>
                 </div>
+                
+                <input type="text" name="category" id="category" placeholder="Tag" required>
+                    
             </div>
                 
             <div class="containerRight">
-                <input type="text" placeholder="R$: 0,00">
-                <textArea placeholder="Descrição..."></textArea>
+                <div class="group-space_beetween align-horizontal">
+                    <label for="price">N$: <input type="text" name="price" id="price" oninput="formatarPreco(this)" value="0,00" required></label>
+                    <input type="text" onkeypress="allowNumbersOnly(event)" name="quantity" id="quantity" placeholder="Quantidade" required>
+                </div>
+                <textArea name="description" placeholder="Descrição..." required></textArea>
             </div>
         </div>
-        <input type="submit" value="Publicar" class="publication" name="publication" id="publication">
+        <input type="button" onclick="validateFormFile()" value="Publicar" class="publication" name="publication" id="publication">
     </form>
 </body>
 </html>

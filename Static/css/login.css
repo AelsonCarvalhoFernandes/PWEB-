@@ -2,9 +2,9 @@ body {
     background-color: white;
 }
 
-form {
-    margin-top: 19%;
-    margin-bottom: 19%;
+form,
+.body {
+    margin-top: 5%;
     margin-left: 30%;
     margin-right: 30%;
 
@@ -16,6 +16,10 @@ form {
     display: flex;
     flex-direction: column;
     background: #1e1e1e;
+}
+
+.body {
+    margin-top: 1%;
 }
 
 div {

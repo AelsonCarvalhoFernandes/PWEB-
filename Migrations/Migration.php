@@ -8,116 +8,112 @@ class Migration{
 
         $connection = new DatabaseConnection;
         $conn = $connection->getConnection();
-        $conn->execute_query($this->cliente());
-        $conn->execute_query($this->vendedor());
-        $conn->execute_query($this->enderecoCliente());
-        $conn->execute_query($this->enderecoVendedor());
-        $conn->execute_query($this->produto());
-        $conn->execute_query($this->venda());
+
+        $conn->execute_query($this->users());
+        $conn->execute_query($this->client());
+        $conn->execute_query($this->seller());
+        $conn->execute_query($this->addressUser());
+        $conn->execute_query($this->product());
+        $conn->execute_query($this->sale());
 
         $conn->close();
         
     }
 
-    function cliente(){
+    function users() {
         $sql = '
-            create table Cliente(
+            create table if not exists users (
                 id int auto_increment primary key,
                 username varchar(20) not null,
                 email varchar(100) not null,
                 password varchar(30) not null,
-                rg varchar(15) not null,
-                cpf varchar(15) not null,
-                telefone varchar(15) not null,
-                foto_url varchar(300),
-                type varchar(10) not null
+                rg varchar(13) not null,
+                cpf varchar(14) not null,
+                cellphone varchar(15) not null,
+                type varchar(10) not null,
+                url_profile_picture varchar(300),
+                money decimal(10,2)
             );
         ';
 
         return $sql;
     }
 
-    function enderecoCliente(){
+    function client() {
         $sql = '
-            create table cliente_endereco(
-                id int auto_increment primary key, 
-                logradouro varchar(100), 
-                cidade varchar(50), 
-                uf varchar(2), 
-                pais varchar(30), 
-                n_residencia int, 
-                id_cliente int,
-                constraint fk_cliente foreign key(id_cliente) references Cliente(id)
-            );
-        ';
-        return $sql;
-    }
-
-    function vendedor(){
-        $sql = '
-            create table Vendedor(
+            create table if not exists client (
                 id int auto_increment primary key,
-                username varchar(20) not null,
-                email varchar(100) not null,
-                password varchar(30) not null,
-                cnpj_rg varchar(15) not null,
-                cnpj_cpf varchar(15) not null,
-                telefone varchar(15) not null,
-                carteira float,
-                foto_url varchar(300),
-                type varchar(10) not null
+                id_user int,
+                foreign key(id_user) references users(id)
             );
         ';
 
         return $sql;
     }
 
-    function enderecoVendedor(){
+    function seller() {
         $sql = '
-            create table cliente_vendedor(
-                id int auto_increment primary key, 
-                logradouro varchar(100), 
-                cidade varchar(50), 
-                uf varchar(2), 
-                pais varchar(30), 
-                n_residencia int, 
-                id_vendedor int,
-                foreign key(id_vendedor) references Vendedor(id)
-            );
-        ';
-        return $sql;
-    }
-
-    function produto(){
-        $sql = '
-            create table Produto(
-                id int auto_increment primary key, 
-                nome varchar(100), 
-                quant int, 
-                categoria varchar(100), 
-                preco float, 
-                descricao text, 
-                dataCriacao date, 
-                dataAtualizacao date, 
-                id_vendedor int,
-                foreign key(id_vendedor) references Vendedor(id)
-            );
-        ';
-        return $sql;
-    }
-
-    function venda(){
-        $sql = '
-            create table Venda(
+            create table if not exists seller (
                 id int auto_increment primary key,
-                id_cliente int,
-                id_vendedor int,
-                id_produto int,
-                preco float,
-                data date,
-                foreign key(id_cliente) references Cliente(id),
-                foreign key(id_vendedor) references Vendedor(id),
-                foreign key(id_produto) references Produto(id)
+                id_user int,
+                foreign key(id_user) references users(id)
+            );
+        ';
+
+        return $sql;
+    }
+
+    function addressUser() {
+        $sql = '
+            create table if not exists address_user (
+                id int auto_increment primary key,
+                street varchar(100),
+                neighborhood varchar(100),
+                city varchar(50),
+                state varchar(2),
+                country varchar(30),
+                number int,
+                id_user int,
+                cep varchar(9),
+                foreign key(id_user) references users(id)
+            );
+        ';
+
+        return $sql;
+    }
+
+    function product() {
+        $sql = '
+            create table if not exists product (
+                id int auto_increment primary key,
+                name varchar(100) not null,
+                quantity int not null,
+                category varchar(100) not null,
+                price decimal(10,2) not null,
+                description text not null,
+                creation_date date not null,
+                update_date date not null,
+                url_image varchar(300) not null,
+                id_seller int,
+                foreign key(id_seller) references seller(id)
+            );
+        ';
+
+        return $sql;
+    }
+
+    function sale() {
+        $sql = '
+            create table if not exists sale (
+                id int auto_increment primary key,
+                id_client int not null,
+                id_seller int not null,
+                id_product int not null,
+                price decimal(10,2) not null,
+                date date not null,
+                foreign key(id_client) references client(id),
+                foreign key(id_seller) references seller(id),
+                foreign key(id_product) references product(id)
             );
         ';
         return $sql;

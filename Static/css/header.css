@@ -18,6 +18,7 @@ header {
 .headerNotAuthenticad {
     display: flex;
     justify-content: flex-end;
+    gap: 30%;
 }
 
 .btnRegister,
@@ -47,6 +48,18 @@ a.btnLogin:hover {
 
 .logo {
     width: 50%;
+    display: flex;
+}
+
+.nameAndIcon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.labelIcon {
+    font-size: 0.8vw;
 }
 
 .search {
@@ -106,14 +119,29 @@ a.btnLogin:hover {
     gap: 2.5%;
 }
 
-.profile button {
+.profile button,
+.logo a {
     font-size: 3vw;
+    cursor: pointer;
+    text-decoration: none;
+    list-style-type: none;
+    color: white;
 }
+
+.logo a:hover {
+    color: rgb(0, 255, 255);
+    text-shadow: 0.1vw 0.1vw 0.5vw rgba(255, 255, 255, 0.382);
+    transform: scale(1.5);
+    transition: 1s;
+}
+
 
 .profile a.button {
     font-size: 3vw;
     text-decoration: none;
     list-style-type: none;
+    list-style-type: none;
+    color: white;
 }
 
 .profile button,
@@ -135,7 +163,6 @@ a.btnLogin:hover {
     transform: scale(1.5);
     transition: 1s;
 }
-
 
 
 /* DROPDOWN */
