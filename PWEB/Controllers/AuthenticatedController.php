@@ -167,66 +167,21 @@ class AuthenticatedController{
         }
     }
 
-
-
-
-    /*
-    function updateProfile() {
-
-        if(isset($_SESSION['user'])){
-
-            $user = $_SESSION['user'];
-
-            $id = $user['id'];   
-            $username = $_POST['username'];
-            $email = $_POST['email'];
-            //$password = $_POST['password'];
-            $rg = $_POST['rg'];
-            $cpf = $_POST['cpf'];
-            $cellphone = $_POST['cellphone'];
-            $type = $user['type'];
-
-            $street = $_POST['street'];
-            $city = $_POST['city'];
-            $state = $_POST['state'];
-            $country = $_POST['country'];
-            $number = $_POST['number'];
-            $cep = $_POST['cep'];
-            $neighborhood = $_POST['neighborhood'];
-
-            $data = $this->userRepository->update($id, $username, $email, $rg, $cpf, $cellphone, $type)->fetch_assoc() ;
-            $address =  $this->addressUserRepository->update($id, $cep, $street, $number, $neighborhood, $city, $state)->fetch_assoc();
-
-            return view('Profile', ['data' => $data, 'dataAddress' => $address, 'Success' => 'Perfil atualizado com sucesso']);
-
-        }else{
-            header("Location: /login");
-            exit();
-        }
-    }*/
-
-    /*
-    function library() {
+    function dataSale() {
         if (isset($_SESSION['user'])) {
             $id = $_SESSION['user']['id'];
     
-            if ($_SESSION['user']['type'] == 'cliente') {
-                $dataProducts = $this->productRepository->selectProductsByIdCliente($id);
-            } else {
-                $dataProducts = $this->productRepository->selectProductsByIdCliente($id);
-            }
-    
-            // Crie um array associativo com uma chave para os dados
-            $viewData = [
-                'dataProducts' => $dataProducts,
-            ];
-    
-            return view('Library', $viewData);
+            $seller = $this->sellerRepository->selectById($id);
+            $id_seller = $seller->fetch_assoc()['id'];
+            
+            $dataSale = $this->saleRepository->selectDataSaleByIdSeller($id_seller)->fetch_all(MYSQLI_ASSOC);
+
+            $this->saleRepository->closeConnection();
+            return view('DataSale', ['dataSale' => $dataSale]);
     
         } else {
             header("Location: /login");
             exit();
         }
-    }    
-    */
+    }
 }

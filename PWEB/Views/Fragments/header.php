@@ -27,6 +27,12 @@
                     <a href="/product/create" id="iconPublication" class="material-symbols-outlined button">add_box</a>
                     <label class="labelIcon" for="iconPublication">PUBLICAÇÃO</label>
                 </div>
+
+                <div class="nameAndIcon">
+                    <a href="/dataSale" id="iconDataSale" class="material-symbols-outlined button">bar_chart</a>
+                    <label class="labelIcon" for="iconDataSale">VENDAS</label>
+                </div>
+
                 <a class="material-symbols-outlined money button">
                     <img class="iconMoney" src="../../Static/img/zonama_money.svg" alt="Zonama Money">
                     <?php

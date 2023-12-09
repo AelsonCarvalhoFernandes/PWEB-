@@ -61,16 +61,7 @@ class ProductRepository{
         //$conn->close();
     }
 
-    function buyProduct($id_client, $id_seller, $id_product, $price) {
-        $conn = $this->connection->getConnection();
     
-        $sql = "INSERT INTO Sale (id_client, id_seller, id_product, price, date) VALUES (?, ?, ?, ?, NOW())";
-    
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("iiis", $id_client, $id_seller, $id_product, $price);
-        $stmt->execute();
-
-    }
 
     function selectProductsByIdClient($id_client) {
         $conn = $this->connection->getConnection();

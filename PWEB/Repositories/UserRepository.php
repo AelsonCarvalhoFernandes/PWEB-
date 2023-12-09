@@ -45,26 +45,6 @@ class UserRepository{
     
         return $data;
     }
-    /*
-    function findEmailExists($email) {
-        $conn = $this->connection->getConnection();
-        $sql = "SELECT COUNT(*) as count FROM users WHERE email = ?";
-        $stmt = $conn->prepare($sql);
-    
-        if ($stmt) {
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-    
-            $result = $stmt->get_result();
-            $row = $result->fetch_assoc();
-    
-            $stmt->close();
-    
-            return ($row['count'] > 0);
-        } else {
-            return false;
-        }
-    }  */  
 
     function selectByEmail($email) {
         $conn = $this->connection->getConnection();

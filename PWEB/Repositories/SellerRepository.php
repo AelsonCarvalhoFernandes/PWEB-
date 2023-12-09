@@ -80,11 +80,15 @@ class SellerRepository{
             $stmt->execute();
     
             $stmt->close();
-            $conn->close();
+            //$conn->close();
     
             return true;
         } else { 
             return false;
         }
+    }
+
+    function closeConnection() {
+        $this->connection->closeConnection();
     }
 }

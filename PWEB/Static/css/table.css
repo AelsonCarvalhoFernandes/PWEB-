@@ -1,0 +1,38 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+caption {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 3vw;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th,
+.same-th-Static {
+    background-color: #f2f2f2;
+    color: #1e1e1e;
+}
+
+td.align-right {
+    text-align: right;
+}
+
+td.align-center {
+    text-align: center;
+}
+
+tbody tr:hover {
+    background-color: #f5f5f5;
+    color: #1e1e1e;
+}

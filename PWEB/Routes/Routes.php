@@ -31,7 +31,9 @@ $route = [
         "/product/create" => fn() => $productController->product(),
         "/product/edit" => fn() => $productController->editProduct(),
 
-        "/library" => fn() => $authenticatedController->library(),       
+        "/library" => fn() => $authenticatedController->library(),  
+        
+        "/dataSale" => fn() => $authenticatedController->dataSale(),
 
     ],
     "POST" => [

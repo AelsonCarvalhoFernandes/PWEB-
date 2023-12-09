@@ -5,6 +5,7 @@ require_once './Repositories/ProductsRepository.php';
 require_once './Repositories/ClientRepository.php';
 require_once './Repositories/SellerRepository.php';
 require_once './Repositories/UserRepository.php';
+require_once './Repositories/SaleRepository.php';
 
 class ProductController{
 
@@ -18,6 +19,7 @@ class ProductController{
         $this->sellerRepository = new SellerRepository();
         $this->userRepository = new UserRepository();
         $this->clientRepository = new ClientRepository();
+        $this->saleRepository = new SaleRepository();
     }
 
     function product() {
@@ -159,7 +161,7 @@ class ProductController{
                 $data = $this->productRepository->selectById($id);
                 $seller = $this->sellerRepository->selectByIdSeller($data['id_seller'])->fetch_assoc();
         
-                $this->productRepository->buyProduct($id_client, $data["id_seller"], $id, $data["price"]);
+                $this->saleRepository->buyProduct($id_client, $data["id_seller"], $id, $data["price"]);
                 $this->productRepository->updateQuantity($id);
                 $this->userRepository->updateMoney($seller['id_user'], $valueMoney);
 
@@ -172,25 +174,4 @@ class ProductController{
             echo $e->getMessage();
         }
     }
-
-
-/*
-    function selectProductsByIdCliente(){
-        $id = $_SESSION['user']['id'];
-
-        $dataProducts = $this->productRepository->selectProductsByIdCliente($id);
-        $this->productRepository->closeConnection();
-        return view('Library', $dataProducts);
-    }*/
-     
-
-
-    /*
-    function selectProductByIdVendedor() {
-        $id = $_SESSION['user']['id'];
-
-        $dataProducts = $this->productRepository->selectProductByIdVendedor($id);
-        $this->productRepository->closeConnection();
-        return view('Library', $dataProducts);
-    }*/
 }
